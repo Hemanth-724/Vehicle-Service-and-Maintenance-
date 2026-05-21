@@ -1,10 +1,16 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
 import com.example.demo.dto.request.VehicleRequestDTO;
 import com.example.demo.dto.response.VehicleResponseDTO;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Vehicle;
-import com.example.demo.entity.VehicleStatus;
+import com.example.demo.enums.VehicleStatus;
 import com.example.demo.exception.CustomerNotFoundException;
 import com.example.demo.exception.InvalidVehicleSearchException;
 import com.example.demo.exception.VehicleAlreadyExistsException;
@@ -12,12 +18,8 @@ import com.example.demo.mapper.VehicleMapper;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

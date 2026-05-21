@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
-import com.example.demo.enums.VehicleStatus;
+import java.time.LocalDateTime;
+
+import com.example.demo.enums.BookingStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,32 +22,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "vehicles")
+@Table(name = "service_bookings")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Vehicle {
+public class ServiceBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vehicleId;
-
-    @Column(nullable = false, unique = true)
-    private String vehicleNumber;
+    private Long bookingId;
 
     @Column(nullable = false)
-    private String brand;
+    private LocalDateTime bookingDate;
 
     @Column(nullable = false)
-    private String model;
+    private String serviceType;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VehicleStatus status;
+    private BookingStatus bookingStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 }

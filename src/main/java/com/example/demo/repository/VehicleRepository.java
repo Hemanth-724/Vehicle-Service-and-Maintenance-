@@ -1,10 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Vehicle;
-import com.example.demo.entity.VehicleStatus;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.example.demo.entity.Vehicle;
+import com.example.demo.enums.VehicleStatus;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 

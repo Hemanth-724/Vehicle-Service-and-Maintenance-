@@ -1,6 +1,8 @@
 package com.example.demo.dto.response;
 
-import com.example.demo.enums.VehicleStatus;
+import java.time.LocalDateTime;
+
+import com.example.demo.enums.BookingStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,14 +15,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VehicleResponseDTO {
+public class ServiceBookingResponseDTO {
 
+    private Long bookingId;
+    private LocalDateTime bookingDate;
+    private String serviceType;
+    private BookingStatus bookingStatus;
     private Long vehicleId;
-    private String vehicleNumber;
-    private String brand;
-    private String model;
-    private VehicleStatus status;
-
-    private Long customerId;
-    private String customerName;
 }

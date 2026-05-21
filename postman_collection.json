@@ -1,0 +1,72 @@
+{
+  "info": {
+    "name": "Vehicle Service Smoke Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "vehicle-service-smoke-tests"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Customer",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"name\":\"Alice\",\"phoneNumber\":\"1234567890\",\"email\":\"alice@example.com\"}"},
+        "url": {"raw":"{{baseUrl}}/customers","host":["{{baseUrl}}"],"path":["customers"]}
+      },
+      "event": [{"listen":"test","script":{"exec":["var json = pm.response.json();","pm.environment.set('customerId', json.customerId);"],"type":"text/javascript"}}]
+    },
+    {
+      "name": "Create Vehicle",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"vehicleNumber\":\"KA01AB1234\",\"brand\":\"Toyota\",\"model\":\"Corolla\",\"customerId\": {{customerId}} }"},
+        "url": {"raw":"{{baseUrl}}/vehicles","host":["{{baseUrl}}"],"path":["vehicles"]}
+      },
+      "event": [{"listen":"test","script":{"exec":["var json = pm.response.json();","pm.environment.set('vehicleId', json.vehicleId);"],"type":"text/javascript"}}]
+    },
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"bookingDate\":\"2026-05-21T10:00:00\",\"serviceType\":\"Oil Change\",\"vehicleId\": {{vehicleId}} }"},
+        "url": {"raw":"{{baseUrl}}/bookings","host":["{{baseUrl}}"],"path":["bookings"]}
+      },
+      "event": [{"listen":"test","script":{"exec":["var json = pm.response.json();","pm.environment.set('bookingId', json.bookingId);"],"type":"text/javascript"}}]
+    },
+    {
+      "name": "Update Booking Status",
+      "request": {
+        "method": "PUT",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"bookingStatus\":\"CONFIRMED\"}"},
+        "url": {"raw":"{{baseUrl}}/bookings/status/{{bookingId}}","host":["{{baseUrl}}"],"path":["bookings","status","{{bookingId}}"]}
+      }
+    },
+    {
+      "name": "Complete Service",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"bookingId\": {{bookingId}}, \"serviceDate\": \"2026-05-21\", \"completionDate\": \"2026-05-21\", \"remarks\": \"Replaced oil\" }"},
+        "url": {"raw":"{{baseUrl}}/services/complete","host":["{{baseUrl}}"],"path":["services","complete"]}
+      },
+      "event": [{"listen":"test","script":{"exec":["var json = pm.response.json();","pm.environment.set('serviceRecordId', json.serviceRecordId);"],"type":"text/javascript"}}]
+    },
+    {
+      "name": "Get Services",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {"raw":"{{baseUrl}}/services","host":["{{baseUrl}}"],"path":["services"]}
+      }
+    }
+  ]
+}

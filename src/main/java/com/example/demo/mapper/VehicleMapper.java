@@ -5,7 +5,7 @@ import com.example.demo.dto.request.VehicleRequestDTO;
 import com.example.demo.dto.response.VehicleResponseDTO;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Vehicle;
-import com.example.demo.entity.VehicleStatus;
+import com.example.demo.enums.VehicleStatus;
 import org.springframework.stereotype.Component;
 
 @Component
